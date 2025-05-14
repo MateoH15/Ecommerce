@@ -1,6 +1,7 @@
 import express from "express";
 import passport from "passport";
 import { loginUser } from "../controllers/sessionController.js";
+import UserDTO from "../dtos/userDTO.js";
 
 const router = express.Router();
 
@@ -22,7 +23,7 @@ router.get(
   "/current",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    res.send({ user: req.user });
+    res.send({ user: new UserDTO(req.user) });
   }
 );
 
